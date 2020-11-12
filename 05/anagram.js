@@ -7,14 +7,12 @@ function validAnagram(str1, str2) {
 
   for (let val of str1) {
     lookup[val] ? lookup[val]++ : (lookup[val] = 1);
-    console.log(lookup)
+    // console.log(lookup)
   }
+  console.log(lookup)
 
   for (let val of str2) {
-    //check if val of str2 exists in str1Obj as a key
-    //if (!str1Obj[val])
-    //return false
-    //check if val equals property of str1Ojb
+    //check if val of str2 doesn't exist in str1Obj as a property
     if (!lookup[val]) {
       return false;
     }
