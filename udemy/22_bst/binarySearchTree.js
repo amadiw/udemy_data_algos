@@ -79,6 +79,33 @@ class BinarySearchTree {
     }
     return visited
   }
+
+  dfsPre() { //tree processed node, left, right
+    const visited =[]
+    let curr = this.root
+
+    function traverse(node) {
+      visited.push(node.value)
+      if(node.left) traverse(node.left)
+      if(node.right) traverse(node.right)
+    }
+    traverse(curr)
+    return visited
+  }
+
+  dfsPost() { // tree processed l, r, node
+    const visited =[]
+    let curr = this.root
+
+    function traverse(node) {
+      if(node.left) traverse(node.left)
+      if(node.right) traverse(node.right)
+      visited.push(node.value)
+    }
+    traverse(curr)
+    return visited
+
+  }
 }
 
 let tree = new BinarySearchTree();
@@ -97,4 +124,6 @@ tree.insert(7);
 console.log("-----");
 // console.log(tree);
 // console.log(tree.find(7));
-console.log(tree.bfs())
+// console.log(tree.bfs()) //[10,5,13,2,7,11,16]
+// console.log(tree.dfsPre()) //[10,5,2,7,13,11,16]
+console.log(tree.dfsPost()) //[2,7,5,11,16,13,10]
