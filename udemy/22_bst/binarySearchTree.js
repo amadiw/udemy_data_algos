@@ -71,7 +71,7 @@ class BinarySearchTree {
     const queue = [node]
 
     while(queue.length) {
-      console.log(queue)
+      // console.log(queue)
       node = queue.shift()
       visited.push(node.value)
       if(node.left) queue.push(node.left)
@@ -104,26 +104,38 @@ class BinarySearchTree {
     }
     traverse(curr)
     return visited
+  }
 
+  dfsInOrder(){ // tree processed left, node, right
+    const visited =[]
+    let curr = this.root
+
+    function traverse(node) {
+      if(node.left) traverse(node.left)
+      visited.push(node.value)
+      if(node.right) traverse(node.right)
+    }
+    traverse(curr)
+    return visited
   }
 }
 
 let tree = new BinarySearchTree();
 tree.insert(10);
-tree.insert(5);
-tree.insert(13);
-tree.insert(11);
-tree.insert(2);
-tree.insert(16);
-tree.insert(7);
+tree.insert(6);
+tree.insert(15);
+tree.insert(3);
+tree.insert(8);
+tree.insert(20);
 /*
         10
-     5     13
-   2   7  11  16
+     6     15
+   3   8      20
 */
 console.log("-----");
 // console.log(tree);
 // console.log(tree.find(7));
-// console.log(tree.bfs()) //[10,5,13,2,7,11,16]
-// console.log(tree.dfsPre()) //[10,5,2,7,13,11,16]
-console.log(tree.dfsPost()) //[2,7,5,11,16,13,10]
+console.log('bfs: ',tree.bfs()) //[10,6,15,3,8,20] insertion order
+console.log('dfsPre: ', tree.dfsPre()) //[10,6,3,8,15,20] export tree structure to easily be copied
+console.log('dfsPost: ',tree.dfsPost()) //[3,8,6,20,15,10]
+console.log('dfsInOrder: ',tree.dfsInOrder()) //[3,6,8,10,15,20] numerical order
