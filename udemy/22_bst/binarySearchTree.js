@@ -118,6 +118,35 @@ class BinarySearchTree {
     traverse(curr)
     return visited
   }
+
+  branchSums(root = this.root, arr=[]) {
+    // invocation of helper function that will return the result array on completion
+
+    helper(root, 0, arr)
+    return arr
+    //if root.left !== null sum+=root.value; return brancSums(root.left, sum+=root.value)
+    //if no left or right node, push sum into arr
+    function helper(node, total, arr) {
+
+      //if node empty, exit function
+      if (node === null) return
+
+      //accumulates node value in variable
+      const newTotal = total + node.value
+      //conditional pushes newTotal into arr if at leaft node and exits function
+      if(!node.left && !node.right) {
+        arr.push(newTotal)
+        return
+      }
+      //else recursively call the helper function for left and right nodes
+      helper(node.left, newTotal, arr)
+      helper(node.right, newTotal, arr)
+    }
+
+  }
+
+  //helper function that takes in a node and accumulates node's value for each branch
+
 }
 
 let tree = new BinarySearchTree();
@@ -139,3 +168,4 @@ console.log('bfs: ',tree.bfs()) //[10,6,15,3,8,20] insertion order
 console.log('dfsPre: ', tree.dfsPre()) //[10,6,3,8,15,20] export tree structure to easily be copied
 console.log('dfsPost: ',tree.dfsPost()) //[3,8,6,20,15,10]
 console.log('dfsInOrder: ',tree.dfsInOrder()) //[3,6,8,10,15,20] numerical order
+console.log('branchSums: ',tree.branchSums()) //[19,24,45]
