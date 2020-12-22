@@ -81,7 +81,7 @@ class BinarySearchTree {
   }
 
   dfsPre() { //tree processed node, left, right
-    const visited =[]
+    const visited =[] // function uses closure via helper traverse function to persist data in visisted array
     let curr = this.root
 
     function traverse(node) {
@@ -91,6 +91,13 @@ class BinarySearchTree {
     }
     traverse(curr)
     return visited
+  }
+
+  dfsPreNoHelper(root = this.root) { //tree processed node, left, right
+    if(!root) return []
+
+      //use of concat eliminates need for array variable and helper function w/closure
+      return[root.value].concat(this.dfsPreNoHelper(root.left)).concat(this.dfsPreNoHelper(root.right))
   }
 
   dfsPost() { // tree processed l, r, node
@@ -164,8 +171,9 @@ tree.insert(20);
 console.log("-----");
 // console.log(tree);
 // console.log(tree.find(7));
-console.log('bfs: ',tree.bfs()) //[10,6,15,3,8,20] insertion order
+// console.log('bfs: ',tree.bfs()) //[10,6,15,3,8,20] insertion order
 console.log('dfsPre: ', tree.dfsPre()) //[10,6,3,8,15,20] export tree structure to easily be copied
-console.log('dfsPost: ',tree.dfsPost()) //[3,8,6,20,15,10]
-console.log('dfsInOrder: ',tree.dfsInOrder()) //[3,6,8,10,15,20] numerical order
-console.log('branchSums: ',tree.branchSums()) //[19,24,45]
+// console.log('dfsPost: ',tree.dfsPost()) //[3,8,6,20,15,10]
+// console.log('dfsInOrder: ',tree.dfsInOrder()) //[3,6,8,10,15,20] numerical order
+// console.log('branchSums: ',tree.branchSums()) //[19,24,45]
+console.log('dfsPreNoHelper: ', tree.dfsPreNoHelper())//[10,6,3,8,15,20] export tree structure to easily be copied
