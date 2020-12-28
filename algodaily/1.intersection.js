@@ -16,9 +16,10 @@ const intHash = (arr1, arr2) => {
       hash[arr1[i]] = 1
     }
   }
+  console.log("hash: ", hash)
   return Object.keys(hash).map(el=>parseInt(el)) //use map to convert key from string back to a number
 }
-console.log(intHash([1,5,2,12,6],[13,10,9,5,8])); //[5]
+console.log(intHash([4,17,4,4,15,16,17,6,7],[15,2,6,20,17,17,8,4,5])) //[4,6,15,17]
 console.log(intHash([6,0,12,10,16],[3,15,18,20,15])); //should return []
 
 
