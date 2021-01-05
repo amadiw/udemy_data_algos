@@ -28,3 +28,24 @@ const reversePointer = (str) => {
 };
 
 console.log(reversePointer("amadi"));
+
+const reverseString = (str) => {
+  // const strArray = str.split("");
+  // console.log(strArray)
+
+  let start = 0;
+  let end = str.length - 1;
+
+  while (start <= end) {
+    const temp = str[start];
+    console.log(temp)
+    str[start] = str[end];
+    str[end] = temp;
+    start++
+    end--
+    console.log("str: ", str)
+  }
+  return str;
+};
+
+console.log("reverseString: ", reverseString("amadi"));
