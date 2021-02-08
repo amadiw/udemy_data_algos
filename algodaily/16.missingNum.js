@@ -1,8 +1,8 @@
 function missingNumbers(numArr) {
   let missing = [];
-  for (let i = 0; i < numArr.length-1; i++) {
-    //console.log(numArr[i-1], numArr[i])
-    if (numArr[i] !== numArr[i+1]-1) {
+  for (let i = 1; i < numArr.length; i++) {
+    if (numArr[i] !== numArr[i-1]+1) {
+      let difference = numArr[i] - numArr[i -1]
       missing.push(numArr[i]+1)
     }
   }
