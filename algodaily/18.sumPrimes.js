@@ -3,6 +3,7 @@ function sumOfPrimes(n) {
 
   const isPrime = n => {
     for (let j = 2; j <= Math.sqrt(n); j++) {
+      //for (let j = 2; j<= n; j++) less optimized
      if (n % j === 0) {
        return false
        }
