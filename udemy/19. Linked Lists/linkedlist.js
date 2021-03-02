@@ -45,6 +45,18 @@ class LinkedList {
     }
     return curr
   }
+
+  shift() { //remove from front ie head
+    if (!this.head) return undefined
+
+    let curr = this.head
+    this.head = curr.next
+    this.length--
+    if (this.length === 0) {//if nothing left, make tail null
+      this.tail = null
+    }
+    return curr
+  }
 }
 
 let list = new LinkedList();
@@ -52,4 +64,6 @@ console.log(list.push(2));
 console.log(list.push(4));
 console.log(list.push(6));
 console.log(list.pop())
+console.log(list)
+console.log(list.shift())
 console.log(list)
