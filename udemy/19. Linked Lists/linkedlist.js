@@ -57,6 +57,33 @@ class LinkedList {
     }
     return curr
   }
+
+  unshift(val) { //adds to front of list, head
+    let newNode = new Node(val)
+    let curr = this.head
+
+    if(!this.head) { //if list empty, add newNode as head
+      this.head = newNode
+    } else {
+      newNode.next = curr //makes old head preceed new head
+      this.head = newNode
+    }
+    this.length++
+    return this
+  }
+
+  get(idx) {
+    if (idx < 0 || idx >= this.length) return undefined
+
+    let count = 0
+    let curr = this.head
+
+    while (count < idx) {
+      curr = curr.next
+      count++
+    }
+    return curr.val
+  }
 }
 
 let list = new LinkedList();
@@ -67,3 +94,12 @@ console.log(list.pop())
 console.log(list)
 console.log(list.shift())
 console.log(list)
+console.log(list.push(5));
+console.log(list.push(6));
+console.log(list)
+console.log(list.unshift(7))
+console.log(list)
+console.log(list.get(0))
+console.log(list.get(1))
+console.log(list.get(2))
+console.log(list.get(3))
