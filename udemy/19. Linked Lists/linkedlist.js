@@ -97,25 +97,29 @@ class LinkedList {
     found.val = val;
     return found;
   }
+
+  insert(val, idx) {
+    if (idx < 0 || idx > this.length) return false
+    if (idx === 0) return !!this.unshift(val)
+    if (idx === this.length) return !!this.push(val)
+
+    let newNode = new Node(val)
+    let prev = this.get(idx - 1)
+    let temp = prev.next
+
+    prev.next = newNode //left node is now pointing to newNode
+    newNode.next = temp.next //new node is now pointing to node previously next to prev
+    this.length++
+    return true
+
+  }
 }
 
 let list = new LinkedList();
 console.log(list.push(2));
 console.log(list.push(4));
 console.log(list.push(6));
-console.log(list.pop());
-// console.log(list);
-console.log(list.shift());
-// console.log(list);
-console.log(list.push(5));
-console.log(list.push(6));
-// console.log(list);
-console.log(list.unshift(7));
-// console.log(list);
-// console.log(list.get(0));
-// console.log(list.get(1));
-// console.log(list.get(2));
-// console.log(list.get(3));
-// console.log(list.get(4));
-console.log(list.set(69, 3));
+console.log(list.push(8));
 console.log(list)
+console.log(list.insert(100,10))
+// console.log(list)
