@@ -99,27 +99,52 @@ class LinkedList {
   }
 
   insert(val, idx) {
-    if (idx < 0 || idx > this.length) return false
-    if (idx === 0) return !!this.unshift(val)
-    if (idx === this.length) return !!this.push(val)
+    if (idx < 0 || idx > this.length) return false;
+    if (idx === 0) return !!this.unshift(val);
+    if (idx === this.length) return !!this.push(val);
 
-    let newNode = new Node(val)
-    let prev = this.get(idx - 1)
-    let temp = prev.next
+    let newNode = new Node(val);
+    let prev = this.get(idx - 1);
+    let temp = prev.next;
 
-    prev.next = newNode //left node is now pointing to newNode
-    newNode.next = temp.next //new node is now pointing to node previously next to prev
-    this.length++
-    return true
-
+    prev.next = newNode; //left node is now pointing to newNode
+    newNode.next = temp.next; //new node is now pointing to node previously next to prev
+    this.length++;
+    return true;
   }
 }
 
-let list = new LinkedList();
-console.log(list.push(2));
-console.log(list.push(4));
-console.log(list.push(6));
-console.log(list.push(8));
-console.log(list)
-console.log(list.insert(100,10))
-// console.log(list)
+const mergeTwoLists = (l1, l2) => {
+  let dummyHead = new Node(); //create new dummyHead node
+  let curr = dummyHead; //dummyHead node pointerK
+
+  while (l1 && l2) {
+    if (l1.val <= l2.val) {
+      curr.next = l1; //sets node to l1 list
+      l1 = l1.next; //advances to next node in l1 list
+    } else {
+      curr.next = l2;
+      l2 = l2.next;
+    }
+    curr = curr.next; //updates curr to next node
+  }
+
+  //edge case where lists aren't same length
+  if (l1) {
+    curr.next = l1;
+  } else if (l2) {
+    curr.next = l2;
+  }
+  return dummyHead.next;
+};
+
+let l1 = new LinkedList();
+let l2 = new LinkedList();
+l1.push(2);
+l1.push(4);
+l1.push(6);
+l2.push(1);
+l2.push(3);
+l2.push(5);
+
+console.log("mergedList: ", mergeTwoLists(l1, l2));
