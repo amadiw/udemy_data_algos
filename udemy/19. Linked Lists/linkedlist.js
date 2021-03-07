@@ -112,6 +112,44 @@ class LinkedList {
     this.length++;
     return true;
   }
+
+  remove (idx) {
+    if (idx < 0 || idx >= this.length) return null
+    if (idx === 0) return this.shift()
+    if (idx === this.length - 1) return this.pop()
+
+    let prev = this.get(idx - 1)
+    let removed = prev.next
+    prev.next = removed.next //makes new link from previous node to node after removed
+    return removed.val
+  }
+
+  reverse () {
+  let curr = this.head
+  let prev = null
+  let next = null
+
+  this.head = this.tail // 1 -> 4
+  this.tail = curr // 4 -> 1
+
+  while (curr) {
+    console.log('beg curr: ', curr.val)
+
+    next = curr.next
+    console.log('next: ', next)
+
+    curr.next = prev
+    console.log('curr.next: ', curr.next)
+
+    prev = curr
+    console.log('prev: ', prev.val)
+
+    curr = next
+    console.log('end curr: ', curr)
+    console.log('------------------------')
+  }
+  return this
+  }
 }
 
 const mergeTwoLists = (l1, l2) => {
@@ -138,13 +176,58 @@ const mergeTwoLists = (l1, l2) => {
   return dummyHead.next;
 };
 
-let l1 = new LinkedList();
-let l2 = new LinkedList();
-l1.push(2);
-l1.push(4);
-l1.push(6);
-l2.push(1);
-l2.push(3);
-l2.push(5);
+const intersection = (l1, l2) => {
+  let p1 = l1
+    let p2 = l2
+console.log('test: ', !l1)
+    //check if heads are null
+    if (!l1 && !l2) return null
 
-console.log("mergedList: ", mergeTwoLists(l1, l2));
+    //traverse both lists with pointers
+    while (p1 != p2) {
+        p1 = p1.next
+        p2 = p2.next
+        console.log('p2', p2)
+
+        if (p1 === p2) {
+            return p1
+        }
+
+        if (!p1) {
+            p1 = l2
+        } else if (!p2) {
+            p2 = l1
+        }
+    }
+
+
+}
+
+const deleteDuplicates = (l1) => {
+  let curr = l1
+
+  while(curr && curr.next) {
+    if (curr.val === curr.next.val) {
+      curr.next = curr.next.next
+    } else {
+      curr = curr.next
+    }
+  }
+  return l1
+}
+
+// let l1 = new LinkedList()
+// l1.push(1)
+// l1.push(2)
+// l1.push(3)
+// l1.push(4)
+
+let l1 = new Node(1)
+l1.next = new Node(2)
+l1.next.next = new Node(3)
+l1.next.next.next = new Node(3)
+// console.log(JSON.stringify(l1))
+
+console.log(JSON.stringify(deleteDuplicates(l1)))
+
+// console.log(l1.tail)
