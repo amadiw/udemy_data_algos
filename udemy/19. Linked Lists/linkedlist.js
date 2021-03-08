@@ -113,42 +113,42 @@ class LinkedList {
     return true;
   }
 
-  remove (idx) {
-    if (idx < 0 || idx >= this.length) return null
-    if (idx === 0) return this.shift()
-    if (idx === this.length - 1) return this.pop()
+  remove(idx) {
+    if (idx < 0 || idx >= this.length) return null;
+    if (idx === 0) return this.shift();
+    if (idx === this.length - 1) return this.pop();
 
-    let prev = this.get(idx - 1)
-    let removed = prev.next
-    prev.next = removed.next //makes new link from previous node to node after removed
-    return removed.val
+    let prev = this.get(idx - 1);
+    let removed = prev.next;
+    prev.next = removed.next; //makes new link from previous node to node after removed
+    return removed.val;
   }
 
-  reverse () {
-  let curr = this.head
-  let prev = null
-  let next = null
+  reverse() {
+    let curr = this.head;
+    let prev = null;
+    let next = null;
 
-  this.head = this.tail // 1 -> 4
-  this.tail = curr // 4 -> 1
+    this.head = this.tail; // 1 -> 4
+    this.tail = curr; // 4 -> 1
 
-  while (curr) {
-    console.log('beg curr: ', curr.val)
+    while (curr) {
+      console.log("beg curr: ", curr.val);
 
-    next = curr.next
-    console.log('next: ', next)
+      next = curr.next;
+      console.log("next: ", next);
 
-    curr.next = prev
-    console.log('curr.next: ', curr.next)
+      curr.next = prev;
+      console.log("curr.next: ", curr.next);
 
-    prev = curr
-    console.log('prev: ', prev.val)
+      prev = curr;
+      console.log("prev: ", prev.val);
 
-    curr = next
-    console.log('end curr: ', curr)
-    console.log('------------------------')
-  }
-  return this
+      curr = next;
+      console.log("end curr: ", curr);
+      console.log("------------------------");
+    }
+    return this;
   }
 }
 
@@ -177,88 +177,106 @@ const mergeTwoLists = (l1, l2) => {
 };
 
 const intersection = (l1, l2) => {
-  let p1 = l1
-    let p2 = l2
-console.log('test: ', !l1)
-    //check if heads are null
-    if (!l1 && !l2) return null
+  let p1 = l1;
+  let p2 = l2;
+  console.log("test: ", !l1);
+  //check if heads are null
+  if (!l1 && !l2) return null;
 
-    //traverse both lists with pointers
-    while (p1 != p2) {
-        p1 = p1.next
-        p2 = p2.next
-        console.log('p2', p2)
+  //traverse both lists with pointers
+  while (p1 != p2) {
+    p1 = p1.next;
+    p2 = p2.next;
+    console.log("p2", p2);
 
-        if (p1 === p2) {
-            return p1
-        }
-
-        if (!p1) {
-            p1 = l2
-        } else if (!p2) {
-            p2 = l1
-        }
+    if (p1 === p2) {
+      return p1;
     }
 
-
-}
+    if (!p1) {
+      p1 = l2;
+    } else if (!p2) {
+      p2 = l1;
+    }
+  }
+};
 
 const deleteDuplicates = (l1) => {
-  let curr = l1
+  let curr = l1;
 
-  while(curr && curr.next) {
+  while (curr && curr.next) {
     if (curr.val === curr.next.val) {
-      curr.next = curr.next.next
+      curr.next = curr.next.next;
     } else {
-      curr = curr.next
+      curr = curr.next;
     }
   }
-  return l1
-}
+  return l1;
+};
 
 const palindrome = (l1) => {
-  let fast = l1
-  let slow = l1
+  let fast = l1;
+  let slow = l1;
 
-  while (fast && fast.next) { //fast.next is for even lists which will hit null
-    slow = slow.next
-    fast = fast.next.next //moves to end of list twice as fast
+  while (fast && fast.next) {
+    //fast.next is for even lists which will hit null
+    slow = slow.next;
+    fast = fast.next.next; //moves to end of list twice as fast
   }
-  fast = l1
-  slow = reverse(slow) //slow pointer is at middle of list. reverse function is used to reverse 2nd half in place
+  fast = l1;
+  slow = reverse(slow); //slow pointer is at middle of list. reverse function is used to reverse 2nd half in place
 
   while (slow) {
     if (slow.val !== fast.val) {
-      return false
+      return false;
     }
-    return true
+    return true;
   }
-  function reverse (head) {
-    let prev
-    let next
+  function reverse(head) {
+    let prev;
+    let next;
 
-    while (head) { //[1, 2, 3, 4]
-      next = head.next //2, 3, 4, null
-      head.next = prev //null, 1, 2, 3
-      prev = head // 1, 2, 3, 4
-      head = next //2, 3, 4, null
+    while (head) {
+      //[1, 2, 3, 4]
+      next = head.next; //2, 3, 4, null
+      head.next = prev; //null, 1, 2, 3
+      prev = head; // 1, 2, 3, 4
+      head = next; //2, 3, 4, null
     }
-    return prev
+    return prev;
   }
-}
+};
 
+const nextGreatestNode = (l1) => {
+  //creates array of linked list values
+  let nodeVals = [];
+  while (l1) {
+    nodeVals.push(l1.val);
+    l1 = l1.next;
+  }
+
+  let result = new Array(nodeVals.length).fill(0); //creates result array of 0s
+  let stack = []; //to process node values
+
+  for (let i = 0; i < nodeVals.length; i++) {
+    while (stack.length && nodeVals[stack[stack.length - 1]] < nodeVals[i])
+      result[stack.pop()] = nodeVals[i];
+    stack.push(i);
+  }
+  return result;
+};
 // let l1 = new LinkedList()
 // l1.push(1)
 // l1.push(2)
 // l1.push(3)
 // l1.push(4)
 
-let l1 = new Node(1)
-l1.next = new Node(2)
-l1.next.next = new Node(2)
-l1.next.next.next = new Node(1)
+let l1 = new Node(2);
+l1.next = new Node(1);
+l1.next.next = new Node(5);
+// l1.next.next.next = new Node(1)
 // console.log(JSON.stringify(l1))
 
-console.log(JSON.stringify(palindrome(l1)))
+console.log(JSON.stringify(nextGreatestNode(l1))); //[5,5,0]
 
 // console.log(l1.tail)
