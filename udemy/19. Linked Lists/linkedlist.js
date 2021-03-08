@@ -216,6 +216,37 @@ const deleteDuplicates = (l1) => {
   return l1
 }
 
+const palindrome = (l1) => {
+  let fast = l1
+  let slow = l1
+
+  while (fast && fast.next) { //fast.next is for even lists which will hit null
+    slow = slow.next
+    fast = fast.next.next //moves to end of list twice as fast
+  }
+  fast = l1
+  slow = reverse(slow) //slow pointer is at middle of list. reverse function is used to reverse 2nd half in place
+
+  while (slow) {
+    if (slow.val !== fast.val) {
+      return false
+    }
+    return true
+  }
+  function reverse (head) {
+    let prev
+    let next
+
+    while (head) { //[1, 2, 3, 4]
+      next = head.next //2, 3, 4, null
+      head.next = prev //null, 1, 2, 3
+      prev = head // 1, 2, 3, 4
+      head = next //2, 3, 4, null
+    }
+    return prev
+  }
+}
+
 // let l1 = new LinkedList()
 // l1.push(1)
 // l1.push(2)
@@ -224,10 +255,10 @@ const deleteDuplicates = (l1) => {
 
 let l1 = new Node(1)
 l1.next = new Node(2)
-l1.next.next = new Node(3)
-l1.next.next.next = new Node(3)
+l1.next.next = new Node(2)
+l1.next.next.next = new Node(1)
 // console.log(JSON.stringify(l1))
 
-console.log(JSON.stringify(deleteDuplicates(l1)))
+console.log(JSON.stringify(palindrome(l1)))
 
 // console.log(l1.tail)
