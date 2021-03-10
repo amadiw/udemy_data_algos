@@ -277,6 +277,7 @@ l1.next.next = new Node(5);
 // l1.next.next.next = new Node(1)
 // console.log(JSON.stringify(l1))
 
+console.log(JSON.stringify(l1))
 console.log(JSON.stringify(nextGreatestNode(l1))); //[5,5,0]
 
 // console.log(l1.tail)
