@@ -41,17 +41,17 @@
   const intersection = (l1, l2) => {
     let p1 = l1;
     let p2 = l2;
-    console.log("test: ", !l1);
+    // console.log("test: ", l1);
     //check if heads are null
-    if (!l1 && !l2) return null;
+    if (l1 === null || l2 === null) return null;
 
     //traverse both lists with pointers
-    while (p1 != p2) {
+    while (p1 !== p2) {
       p1 = p1.next;
       p2 = p2.next;
-      console.log("p2", p2);
 
       if (p1 === p2) {
+        // console.log(p1)
         return p1;
       }
 
@@ -61,6 +61,7 @@
         p2 = l1;
       }
     }
+    return p1
   };
 
   const deleteDuplicates = (l1) => {
@@ -148,18 +149,19 @@
 
   const l1 = {
   "val":1,
-  "next":{"val":3,
-  "next":{"val":5,
-  "next":{"val":7,
   "next":{"val":9,
+  "next":{"val":1,
+  "next":{"val":2,
+  "next":{"val":4,
   "next":null}}}}}
 
   const l2 = {
-    "val":2,
+    "val":3,
+    "next":{"val":2,
     "next":{"val":4,
-    "next":{"val":6,
-    "next":{"val":8,
-    "next":{"val":10,
-    "next":null}}}}}
+    // "next":{"val":8,
+    // "next":{"val":4,
+    // "next":{"val":5,
+    "next":null}}}//}}}
 
-  console.log(JSON.stringify(mergeTwoLists(l1, l2))) // 1,2,3,4,5 -> 1,3,5,2,4
+  console.log(JSON.stringify(intersection(l1, l2))) // 1,2,3,4,5 -> 1,3,5,2,4
