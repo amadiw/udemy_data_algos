@@ -39,3 +39,25 @@ var numJewelsInStones = function(jewels, stones) {
     return sum
 
 };
+
+var isIsomorphic = function(s, t) {
+  //create 2 hash maps using 1 for loop
+      //hashmap value is set to index it was found at. essentially on storing the value the first time it's seen
+  //compare the values
+      //if values (indice of first occurance) the same then they are isomorphic
+
+   let sHash = {}
+  let tHash = {}
+  for (let i = 0; i < s.length; i++) {
+      console.log(!sHash[s[i]])
+      if (sHash[s[i]] === undefined) sHash[s[i]] = i
+      if (tHash[t[i]] === undefined) tHash[t[i]] = i
+
+      if (sHash[s[i]] !== tHash[t[i]]) {
+      return false
+      }
+  }
+  return true
+};
+console.log(isIsomorphic("bbbaaaba",
+"aaabbbba"))//false
