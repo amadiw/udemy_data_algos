@@ -1,29 +1,40 @@
-const wordPattern = (pattern, string) => {
+/**
+ * @param {string} pattern
+ * @param {string} s
+ * @return {boolean}
+ */
+ var wordPattern = function(pattern, s) {
+  //both inputs are strings
+  //use hash to map pattern to words
+  //use for loop to construct and test hashmap
+  //if hash[pattern] exists then check whether that value mathches the current word.
+      //if not return false
+  //else hash[pattern] = s[i]
+  //return true
 
-  const words = string.split(' ')
+  //create hashes
   const hash = {}
-  const mapped = new Set()
+  const words = s.split(' ')
+  // const mapped = new Set()
 
-  //create hash map mapping pattern to words and add words to mapped Set
-    //hash = {pattern: words}
-  //if word or pattern is already in data structures & not match then false
-  //evaluate to true if loop is completed
+
+  if(pattern.length !== words.length) return false
+  if(new Set(words).size !== new Set(pattern).size) return false
 
   for (let i = 0; i < pattern.length; i++) {
-    const curPattern = pattern[i]
-    const curWord = words[i]
-    if (!hash[curPattern] && !mapped.has(curWord)) {
-      hash[curPattern] = curWord
-      mapped.add(curWord)
-    } else if (hash[curPattern] !== curWord) {
-      return false
-    }
+      const curPattern = pattern[i]
+      const curWord = words[i]
+
+      if (hash[curPattern]) {
+        if (hash[curPattern] !== curWord) return false
+  } else {
+    hash[curPattern] = curWord
   }
-  return true
+
+}
+return true
 }
 
-
-
-
-console.log(wordPattern('abba', 'cat dog dog cat')) //true
-console.log(wordPattern('adca', 'cat dog dog cat')) //false
+console.log(wordPattern('abc', 'b c a'))//true
+console.log(wordPattern('abba', 'dog cat cat dog'))//true
+console.log(wordPattern('abda', 'dog cat cat dog'))//false
