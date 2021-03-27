@@ -1,5 +1,4 @@
 function flatten(arr){
-  // add whatever parameters you deem necessary - good luck!
   //declare new array
   //use closure to preserve lexical scope
   let newArr = []
@@ -16,6 +15,7 @@ function flatten(arr){
       }
      }
   }
+
   helper(arr)
   return newArr
 }
