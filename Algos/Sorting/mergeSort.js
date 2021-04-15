@@ -26,4 +26,17 @@ const merge =(arr1, arr2) => {
   return results
 }
 
-console.log(merge([1,10,50], [2,14,99,100]))
+// console.log(merge([1,10,50], [2,14,99,100]))
+const mergeSort = arr => {
+  if(arr.length <=1) return arr
+
+  //need to split array in order to do merging
+
+  let mid = Math.floor(arr.length/2)
+
+  let left = mergeSort(arr.slice(0,mid))
+  let right = mergeSort(arr.slice(mid))
+  return merge(left, right)
+}
+
+console.log(mergeSort([10,4,3,73])) //[3,4,10,73]
