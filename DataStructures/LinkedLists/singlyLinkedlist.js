@@ -1,4 +1,4 @@
-class Node {
+  class Node {
   constructor(val) {
     this.val = val;
     this.next = null;
@@ -152,3 +152,9 @@ class LinkedList {
   }
 }
 
+const list = new LinkedList()
+list.push(1)
+list.push(2)
+list.push(3)
+
+console.log(list.get(00  ))
