@@ -157,4 +157,4 @@ list.push(1)
 list.push(2)
 list.push(3)
 
-console.log(list.get(00  ))
+console.log(list.get(0))

@@ -67,21 +67,68 @@ class DoublyLinked {
   }
 
   unshift(val) {
-    const newNode = new Node (val)
+    const newNode = new Node(val);
 
-    if(this.length === 0) {
-      this.head = newNode
-      this.tail = newNode
+    if (this.length === 0) {
+      this.head = newNode;
+      this.tail = newNode;
     } else {
-      this.head.prev = newNode
-      newNode.next = this.head
-      this.head = newNode
+      this.head.prev = newNode;
+      newNode.next = this.head;
+      this.head = newNode;
     }
-    this.length++
-    return this
+    this.length++;
+    return this;
   }
 
+  get(ind) {
+    if (ind < 0 || ind >= this.length) return null;
 
+    let count, curr;
+
+    if (ind < this.length / 2) {
+      count = 0;
+      curr = this.head;
+      while (count != ind) {
+        curr = curr.next;
+        count++;
+      }
+    } else {
+      count = this.length - 1;
+      curr = this.tail;
+      while (count != ind) {
+        curr = curr.prev;
+        count--;
+      }
+    }
+    return curr;
+  }
+
+  set(val, ind) {
+    const foundNode = this.get(ind)
+    if (foundNode) {
+      foundNode.val = val
+      return true
+    }
+    return false
+  }
+
+  insert(val, ind) {
+    if(ind < 0 || ind > this.length) return false
+    if(ind === 0) return this.unshift(val)
+    if(ind === this.length) return this.push(val)
+
+
+
+    const newNode = new Node(val)
+    const prevNode = this.get(ind - 1)
+    let aftNode = prevNode.next
+
+    prevNode.next = newNode
+    newNode.prev = prevNode
+    newNode.next = aftNode
+    aftNode.prev = newNode
+  }
 }
 
 const list = new DoublyLinked();
@@ -90,5 +137,6 @@ list.push(1);
 list.push(2);
 list.push(3);
 
-list.unshift(0);
+// list.get(0);
+console.log(list.insert(10,1));
 console.log(list);
