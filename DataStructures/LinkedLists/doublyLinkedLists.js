@@ -118,16 +118,32 @@ class DoublyLinked {
     if(ind === 0) return this.unshift(val)
     if(ind === this.length) return this.push(val)
 
-
-
     const newNode = new Node(val)
     const prevNode = this.get(ind - 1)
-    let aftNode = prevNode.next
+    const aftNode = prevNode.next
 
     prevNode.next = newNode
     newNode.prev = prevNode
     newNode.next = aftNode
     aftNode.prev = newNode
+  }
+
+  remove(ind) {
+    if(ind < 0 || ind >= this.length) return null
+    if(ind === 0) return this.shift(ind)
+    if(ind === this.length -1) return this.pop(ind)
+
+    const removedNode = this.get(ind)
+    const beforeNode = removedNode.prev
+    const aftNode = removedNode.next
+
+    beforeNode.next = removedNode.next
+    aftNode.prev = removedNode.prev
+    removedNode.prev = null
+    removedNode.next = null
+    this.length--
+
+    return removedNode
   }
 }
 
@@ -136,7 +152,10 @@ const list = new DoublyLinked();
 list.push(1);
 list.push(2);
 list.push(3);
+list.push(4)
+list.push(5)
 
 // list.get(0);
-console.log(list.insert(10,1));
+list.remove(3)
+// list.remove(1)
 console.log(list);
